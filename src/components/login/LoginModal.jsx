@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import { auth, googleProvider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
-import FacebookLoginComponent from './FacebookLoginComponent'; // Import the component
+import FacebookLoginComponent from "../thirdPartyLogin/FacebookLogin";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
