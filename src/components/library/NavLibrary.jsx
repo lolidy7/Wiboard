@@ -118,7 +118,7 @@ export default function NavLibrary() {
                       <div className="flex items-center space-x-3">
                         {/* Unlike Button */}
                         <button
-                          className="flex items-center text-red-500 hover:scale-110 transition-transform duration-200"
+                          className="flex items-center text-white hover:scale-110 transition-transform duration-200"
                           onClick={() => {
                             setLikedImagesState((prev) =>
                               prev.filter((_, i) => i !== index)
