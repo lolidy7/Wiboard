@@ -190,12 +190,6 @@ const ImageSearch = () => {
               e.target.style.opacity = 1; // Fade in when loaded
             }}
           />
-          <div className="image-meta">
-            <p className="photographer">Photo by {image.user.name}</p>
-            {image.description && (
-              <p className="description">{image.description}</p>
-            )}
-          </div>
         </Link>
         ))}
       </div>

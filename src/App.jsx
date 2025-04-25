@@ -45,6 +45,10 @@ function App() {
           path: "/about",
           element: <About />,
         },
+        {
+          path: "/detail/:id", // Dynamic route with an :id parameter
+          element: <Detail />,
+        },
       ],
     },
     // Protected routes with Layout (e.g., /home, /detail/:id, /library)
@@ -59,10 +63,6 @@ function App() {
             {
               path: "/home",
               element: <Home />,
-            },
-            {
-              path: "/detail/:id", // Dynamic route with an :id parameter
-              element: <Detail />,
             },
             {
               path: "/library",

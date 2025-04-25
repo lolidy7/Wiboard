@@ -2,7 +2,7 @@ import SlideShow from '../components/slideshow/SlideShow';
 
 const Welcome = () => {
   return (
-    <div className="dark:bg-[#1a1a1a] -m-4">
+    <div className="welcome dark:bg-[#1a1a1a] -m-4">
       <header></header>
       <main className="font-roboto bg-white dark:bg-[#1a1a1a] text-black dark:text-white relative min-h-screen">
         <section>
@@ -93,7 +93,7 @@ const Welcome = () => {
                       alt="Future Room"
                       className="w-full h-[200px] object-cover rounded-[10px]"
                     />
-                    <div className="text-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
                       Future room style
                     </div>
                   </div>
@@ -103,7 +103,7 @@ const Welcome = () => {
                       alt="Cozy Room"
                       className="w-full h-[200px] object-cover rounded-[10px]"
                     />
-                    <div className="text-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
+                    <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
                       Our kitchen upgrade
                     </div>
                   </div>
@@ -113,7 +113,7 @@ const Welcome = () => {
                       alt="Modern Living Room"
                       className="w-full h-[200px] object-cover rounded-[10px]"
                     />
-                    <div className="text-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
                       My second living room
                     </div>
                   </div>
@@ -123,7 +123,7 @@ const Welcome = () => {
                       alt="Kitchen Design"
                       className="w-full h-[200px] object-cover rounded-[10px]"
                     />
-                    <div className="text-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black/50 px-2.5 py-1.5 rounded-[5px] text-[1.25rem] text-center w-full">
                       People dream place
                     </div>
                   </div>
@@ -140,14 +140,14 @@ const Welcome = () => {
                 <div className="pic-fashion relative px-5">
                   <div className="card">
                     <img
-                      src="/images/fashion/fashion-01.png"
+                      src="/images/image 62.png"
                       alt="Fashion 1"
                       className="w-full h-[400px] object-cover rounded-2xl"
                     />
                   </div>
                   <div className="img-pop-up absolute bottom-10 left-10 w-[200px]">
                     <img
-                      src="/images/fashion/fashion-02.png"
+                      src="/images/image 6.png"
                       alt="Fashion 2"
                       className="w-full rounded-2xl object-cover"
                     />
@@ -225,7 +225,7 @@ const Welcome = () => {
         </section>
       </main>
       <footer className="text-center pb-5">
-        <p>© 2025 Wiboard by ISTAD. All rights reserved.</p>
+        <p className='dark:text-primary'>© 2025 Wiboard by ISTAD. All rights reserved.</p>
       </footer>
     </div>
   );

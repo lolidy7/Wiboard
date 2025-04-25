@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/explore/NoScroll.css";
 
 export default function Explore() {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [featuredImages, setFeaturedImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -187,6 +189,10 @@ export default function Explore() {
     fetchData();
   }, []);
 
+  const handlePhotoClick = (photoId) => {
+    navigate(`/detail/${photoId}`);
+  };
+
   if (loading && !isSearching) {
     return (
       <div className="dark:bg-gray-800 font-sans -m-4 pb-5">
@@ -317,6 +323,7 @@ export default function Explore() {
                     <div
                       key={image.id}
                       className="relative h-64 rounded-xl overflow-hidden object-cover hover:scale-110 transition duration-300 ease-in-out cursor-pointer hover:opacity-85"
+                      onClick={() => handlePhotoClick(image.id)}
                     >
                       <img
                         src={image.url}
@@ -326,8 +333,7 @@ export default function Explore() {
                       {/* Image overlay for better text visibility */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                       <div className="absolute inset-0 flex flex-col items-center justify-end mb-4 text-white text-center px-2">
-                        <p className="text-sm">By {image.user}</p>
-                        <h2 className="text-lg font-bold">{image.title}</h2>
+                        <h2 className="font-bold">{image.title}</h2>
                       </div>
                     </div>
                   ))}
@@ -365,6 +371,7 @@ export default function Explore() {
                     <div
                       key={image.id}
                       className="relative h-64 rounded-xl overflow-hidden object-cover hover:scale-110 transition duration-300 ease-in-out cursor-pointer hover:opacity-85 group"
+                      onClick={() => handlePhotoClick(image.id)}
                     >
                       <img
                         src={image.url}
@@ -532,6 +539,7 @@ export default function Explore() {
                       <div
                         key={photo.id}
                         className="relative h-64 rounded-lg overflow-hidden group"
+                        onClick={() => handlePhotoClick(photo.id)}
                       >
                         <img
                           src={photo.urls.regular}
@@ -541,7 +549,7 @@ export default function Explore() {
                         {/* Image overlay for better text visibility */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                         <div className="absolute bottom-2 left-2 text-white text-sm">
-                          <p>By {photo.user.name}</p>
+                          <p> {photo.alt_description}</p>
                         </div>
                       </div>
                     ))}

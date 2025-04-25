@@ -14,6 +14,8 @@ import {
   FacebookMessengerIcon
 } from 'react-share';
 import { useDarkMode } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
+import { LoginModal } from './Login';
 
 const BASE_URL = 'https://api.unsplash.com';
 const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
@@ -33,6 +35,8 @@ export default function Detail() {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const shareMenuRef = useRef(null);
   const [showingDownloadId, setShowingDownloadId] = useState(null);
+  const { user, loading: authLoading } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
 
   // Get dark mode state from context
@@ -148,11 +152,16 @@ export default function Detail() {
 
   // Handle like button click
   const handleLikeClick = () => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
+  
     const likedPin = {
       url: pin.image_large_url,
       collection: pin.title || 'Untitled',
     };
-
+  
     if (isLiked) {
       // Remove the pin from likedImages in localStorage
       const updatedLikedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
@@ -167,7 +176,7 @@ export default function Detail() {
       localStorage.setItem('likedImages', JSON.stringify([...likedImages, likedPin]));
       setLikes((prevLikes) => prevLikes + 1);
     }
-
+  
     setIsLiked(!isLiked);
   };
 
@@ -266,6 +275,11 @@ export default function Detail() {
 
   // New function to open the save modal
   const openSaveModal = () => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
+  
     if (isSaved) {
       // If already saved, remove from all collections
       handleRemoveFromAllCollections();
@@ -413,6 +427,11 @@ export default function Detail() {
 
   return (
     <div className={` -m-4 min-h-screen pb-10 transition-colors duration-300 ${darkMode ? 'bg-primary-darkmode text-white' : 'bg-white text-black'}`}>
+      {/* Login Modal */}
+      <LoginModal 
+        show={showLoginModal} 
+        onClose={() => setShowLoginModal(false)}
+      />
       {/* Back Button */}
       <div className="p-4">
         <button
@@ -844,5 +863,6 @@ export default function Detail() {
         </div>
       </div>
     </div>
+    
   );
 }
