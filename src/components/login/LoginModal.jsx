@@ -131,8 +131,6 @@ export default function LoginModal({ show, onClose }) {
                 }
               }}
               onError={(errorMessage) => setError(errorMessage)}
-              className="w-full justify-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
-              style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
             >
               Sign in with Facebook
             </FacebookLoginComponent>
