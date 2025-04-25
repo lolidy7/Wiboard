@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
-import { auth, googleProvider, facebookProvider } from "../../firebase";
+import { auth, googleProvider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
+import FacebookLoginComponent from './FacebookLoginComponent'; // Import the component
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,9 +20,8 @@ const LoginSchema = Yup.object().shape({
 export default function LoginModal({ show, onClose }) {
   const { login } = useAuth();
   const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); // Added state for password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [isFacebookLoading, setIsFacebookLoading] = useState(false);
 
   const handleLogin = async (values, { setSubmitting }) => {
     try {
@@ -63,11 +63,9 @@ export default function LoginModal({ show, onClose }) {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       
-      // Get the Firebase ID token
       const token = await user.getIdToken();
       const refreshToken = user.refreshToken;
   
-      // Store tokens in your system
       const userData = {
         id: user.uid,
         name: user.displayName,
@@ -83,46 +81,6 @@ export default function LoginModal({ show, onClose }) {
       }
     } catch (err) {
       setError(err.message || 'Google login failed');
-    }
-  };
-
-  const handleFacebookLogin = async () => {
-    try {
-      setError(null);
-      const result = await signInWithPopup(auth, facebookProvider);
-      const user = result.user;
-      
-      // Facebook provides additional credential info
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
-  
-      // Get the Firebase ID token
-      const token = await user.getIdToken();
-      const refreshToken = user.refreshToken;
-  
-      // Prepare user data
-      const userData = {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        avatar: user.photoURL || `https://graph.facebook.com/${user.providerData[0].uid}/picture?type=large&access_token=${accessToken}`
-      };
-  
-      // Login with Firebase tokens
-      await login(token, refreshToken, userData);
-      onClose();
-      
-      if (window.location.pathname === "/") {
-        navigate("/home");
-      }
-    } catch (err) {
-      console.error("Facebook login error:", err);
-      setError(err.message || 'Facebook login failed');
-      
-      // Handle specific Facebook errors
-      if (err.code === 'auth/account-exists-with-different-credential') {
-        setError('An account already exists with the same email but different sign-in method');
-      }
     }
   };
 
@@ -162,44 +120,22 @@ export default function LoginModal({ show, onClose }) {
               />
               Sign in with Google
             </button>
-            <button
-              type="button"
-              onClick={handleFacebookLogin}
-              disabled={isFacebookLoading}
-              className={`w-full flex items-center justify-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none transition-colors dark:border-gray-600 dark:hover:bg-gray-700 dark:text-white ${
-                isFacebookLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            
+            {/* Replace the old Facebook button with the new component */}
+            <FacebookLoginComponent
+              auth={auth}
+              onClose={onClose}
+              onSuccess={() => {
+                if (window.location.pathname === "/") {
+                  navigate("/home");
+                }
+              }}
+              onError={(errorMessage) => setError(errorMessage)}
+              className="w-full justify-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }}
             >
-              {isFacebookLoading ? (
-                <svg
-                  className="animate-spin -ml-1 mr-2 h-5 w-5 text-gray-600 dark:text-gray-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-              ) : (
-                <img
-                  src="https://static.vecteezy.com/system/resources/thumbnails/016/716/447/small_2x/facebook-icon-free-png.png"
-                  alt="Facebook"
-                  className="w-5 h-5 mr-2"
-                />
-              )}
-              {isFacebookLoading ? "Signing in..." : "Sign in with Facebook"}
-            </button>
+              Sign in with Facebook
+            </FacebookLoginComponent>
           </div>
 
           <div className="flex items-center">
@@ -248,7 +184,6 @@ export default function LoginModal({ show, onClose }) {
                   />
                 </div>
 
-                {/* Password Input */}
                 <div>
                   <div className="relative mt-7">
                     <Field

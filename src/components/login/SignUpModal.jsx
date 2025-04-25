@@ -5,8 +5,6 @@ import { useState } from 'react';
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
-import { auth, googleProvider, facebookProvider } from "../../firebase";
-import { signInWithPopup } from "firebase/auth";
 import { handleFacebookSignUp } from "../thirdPartySignUp/facebookSignUp";
 import { handleGoogleSignUp } from "../thirdPartySignUp/googleSignUp";
 
