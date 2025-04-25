@@ -18,4 +18,3 @@ Use the following credentials to log in:
 
 - **Email:** john@mail.com  
 - **Password:** changeme
-# Wiboard
