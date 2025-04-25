@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "imagerecognitionapp-455808",
+  "private_key_id": "c84f013a55336491a5e4bc0dd2f126c1bb083768",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDKp0wz1rqTjY6H\nPlONIS62Zwj2wjF0AV8mblAd8YEwB3zw3zRfMiEgCVZ8HrzSgtIG7z2o8Gb00Wyi\nu2XyDo/spIXEHAn1zQYeEF4CfGM2v8HvjWl+U+iqzE8qlhKJ/deIevspwbem4h7r\nTm4JCfiQD0ajxi0JxPvDHm2VP91gCjpwDjkwemglANGJZxIIv26Nf8QWpaZXs24I\nSi3bkG7m/TPg8jtuF6BGOLSeAoryaDfGhB2h8+kLEwaUZPDGvLBVoZanq+4VlMPa\nqAxdR1xEwAwCC34AljGBZyGbsssh08+wC0QrmniX2xpXqeKLoVfIrZQodumJvjx4\nl6vtA/E9AgMBAAECggEATmqpLn//J1yF0+h2rSwzZqp9Cfr/5tsnBfh2sPeEHWEw\nZAaCvfloXvyuBg5g03aCreNCcU5BEKe/CUNJgf5Hi/Lnvgh5hC8nGFgOAJlATO2r\nrjYCpbrzU7AGTDzRBKuAjNPFv5UxqvZhr3zkUEQW9iurEnF7eQXLw+dQ0Qlq8J+k\nUSQ3xPxsT5LZM7HiyLJAKCSo6Ihl3a+kPozBQcveRv8NH8aIDsvK7qAeDlBw5aHK\nkUbuLbTKaYHZdjVR+J3Oj4IfGV4gjWSaEJ4gOF6TmPJ/RmCSpR4Q4LZ3NzLmPZkL\n7SssnWHb5X1k/jij9aQ8P+D/0qCXZYb4CssYTyuYgwKBgQDlSVCbNX2BzqtLM3eT\n/wRnNsFLfi9/XgiLZv91oa2qGmL7fADRRT7ezfIZ7Wts7nH2ePLxs+iZBSK4RsT1\nbRaZwBULW3voSy7TdQk+7IiIVCNnywFujet8CBykA0Ud4kq/Bp8MENgdotU/eydd\nBGGYDBhsY5SNFZTrNsN2zYbjwwKBgQDiQ6G7JHC9dAQuzYxgW72dSy1cwdEl62Sy\nUwbQSWFP06FSH2xhrn+xFjQ29WRFwMiwpfpI1xBIeWvFZX8SI9H/vINjFHOjffA3\n8mqHLOPV/Sink+2wRuS76qHglW8kIABUjW3BeXgev3ytJpl8SzKqyzPWzqWUdCM0\nTCZHCeWG/wKBgQCaMytFpryojwA+S/ewjYI9k+J9TfjNlMT0U6mcR8aOrr5A2U2H\ncCVvHFwkubpUgSwdkYv5p3/XYU/PVLDjSaE4d6jvgXAccmukhIJaUiMkZEmHZUyq\nOEHVoXL5jsVt6qFQRTizmaRukfMOhVmcwfSMmB3Yz0O5enkzkxnzjReZlwKBgAeJ\nZy67pQG6hpUkhaOECsndgjJPxm6z65PBDj4L47DsBLiekVajoF8+tRiLjf6A0G6J\n6M9aUpGHcd6OZfAtv0X8eofnW367qC/E5GWCSkiLeTozxDwV8HKN+zxm3d/fLQOj\n/l7uc+DaUgXWflBUlOh5gk2KbpuGTtHkI3ZETx/zAoGABOdotdJeGezTkusMY6Ti\nncRK/BQVHaX3igF9+dGOwZuduIoYFy8/1dBGgi/7twi5AyuPEl7D/bbwsULK+8RD\nCiPnuxRnENdWUSSoJGhvliJ4SDW5nvqhWybxmQ2uG3t0VKUT+YsAQoa2HLAx3iF5\ne6B0oeswBfHzw9ohuLm3EBQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "googlevision@imagerecognitionapp-455808.iam.gserviceaccount.com",
+  "client_id": "112080515182461976835",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/googlevision%40imagerecognitionapp-455808.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -1,0 +1,28 @@
+/* Light mode styles */
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark mode styles */
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark .text-gray-300 {
+  color: #d1d5db;
+}
+
+body.dark .bg-gray-800 {
+  background-color: #1f2937;
+}
+
+body.dark .bg-gray-900 {
+  background-color: #121212;
+}
+
+body.dark .text-white {
+  color: #ffffff;
+}
+

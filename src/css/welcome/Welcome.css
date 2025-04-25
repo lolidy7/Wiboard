@@ -1,0 +1,1126 @@
+main {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  position: relative;
+  height: 100%;
+}
+.container {
+  max-width: 100%;
+  margin: auto;
+}
+.row {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.col-6 {
+  width: 50%;
+}
+main {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  position: relative;
+  height: 100%;
+}
+.container {
+  max-width: 100%;
+  margin: auto;
+}
+.row {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.col-6 {
+  width: 50%;
+}
+/*-----------------dark-mode------------ */
+:root {
+  --grid-unit: 1rem;
+  --border-radius-base: 0.5rem;
+}
+button[data-theme-toggle]{
+  background: none;
+  border: none;
+}
+
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-fg: #000000;
+  --btn-bg: #ddd;
+  --btn-color: #000;
+  --btn-boder: rgba(0, 0, 0, 0.347);
+  
+}
+[data-theme="dark"] {
+  --color-bg: #1a1a1a; /* Changed from red to dark gray */
+  --color-fg: #ffffff;
+  --btn-bg: #4a4b5d;
+  --btn-color: #fff;
+  --btn-boder: rgba(255, 255, 255, 0.582);
+}
+
+/*-----------------js-swiper------------ */
+.swiper {
+  width: 100%;
+  height: 50%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+/* -----------------------navbar------------------ */
+a {
+  text-decoration: none;
+  color: var(--color-fg);
+}
+
+.navbar {
+  padding: 10px 0;
+  --color-bg: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .aside-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--color-fg);
+}
+.navbar .aside-left .btn-explore {
+  border: 1px solid;
+  border-color: var(--btn-boder);
+  border-radius: 16px;
+  padding: 5px 14px;
+  outline: none;
+  transition: 0.3s all;
+  font-weight: 600;
+}
+.navbar .aside-left .btn-explore:hover {
+  background-color: #20a505;
+  color: white;
+}
+.navbar .aside-left .nav-branding {
+  width: 140px;
+}
+.navbar .aside-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.navbar .aside-right .about {
+  font-weight: 600;
+  transition: 0.3s all;
+}
+.navbar .aside-right .about:hover {
+  transform: scale(1.1);
+}
+.navbar .aside-right .btn {
+  display: flex;
+  gap: 30px;
+  font-weight: 600;
+}
+.navbar .aside-right .btn a {
+  border-radius: 16px;
+  padding: 5px 14px;
+  outline: none;
+  transition: 0.3s all;
+}
+.navbar .aside-right .btn .btn-log-in {
+  border: 1px solid #2bab47;
+}
+.navbar .aside-right .btn .btn-log-in:hover {
+  border: 1px solid #48ac46d6;
+  background-color: rgba(128, 128, 128, 0.341);
+}
+.navbar .aside-right .btn .btn-sign-up {
+  background-color: #2bab47;
+}
+.navbar .aside-right .btn .btn-sign-up:hover {
+  background-color: #055215ce;
+}
+
+.slide-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide-content img {
+  width: 100%;
+  height: 90vh;
+  display: block;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* darker overlay */
+  z-index: 1;
+}
+
+.slide-title {
+  font-family: Roboto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  color: whitesmoke;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;
+}
+
+/* ---------------blog-type-------------- */
+.blog-type {
+  width: 100%;
+  height: auto;
+  background-color: #48d52b;
+}
+.blog-type .food-blog {
+  height: auto;
+}
+.blog-type .food-blog .center-item {
+  align-items: center;
+  display: flex;
+}
+.blog-type .food-blog .item-text {
+  padding: 100px 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.blog-type .food-blog .item-text .title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.895);
+}
+.blog-type .food-blog .item-text .title h3 {
+  font-size: 48px;
+}
+.blog-type .food-blog .item-text .title p {
+  font-size: 25px;
+  padding-top: 30px;
+  padding-inline: 80px;
+  padding-bottom: 30px;
+}
+.blog-type .food-blog .item-text .explore {
+  padding: 5px 14px;
+  font-size: 16px;
+  transition: 0.3s all;
+  border-radius: 20px;
+  color: #20a505;
+  background-color: white;
+}
+.blog-type .food-blog .item-text .explore:hover {
+  background-color: #3fc324;
+  color: white;
+}
+.blog-type .food-blog .item-pic {
+  padding: 100px 80px;
+}
+.blog-type .food-blog .item-pic .pic-01 {
+  display: flex;
+  align-items: center;
+}
+.blog-type .food-blog .item-pic .pic-03 {
+  margin-right: 50px;
+}
+.blog-type .food-blog .item-pic .pic-03 {
+  display: flex;
+  align-items: center;
+}
+.blog-type .food-blog .item-pic img {
+  width: 180px;
+  height: 300px;
+  border-radius: 18px;
+  object-fit: cover;
+  overflow: hidden;
+}
+/* -----------------decor-blog------------- */
+.decor-blog {
+  background-color: #7c3aed;
+  padding: 120px 0;
+  width: 100%;
+  height: auto;
+}
+
+.decor-blog .item-text {
+  padding: 100px 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.decor-blog .item-text .title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.895);
+}
+.decor-blog .item-text .title h3 {
+  font-size: 48px;
+}
+.decor-blog .item-text .title p {
+  font-size: 25px;
+  padding-top: 30px;
+  padding-inline: 80px;
+  padding-bottom: 30px;
+}
+.decor-blog .item-text .explore {
+  padding: 5px 14px;
+  font-size: 16px;
+  transition: 0.3s all;
+  border-radius: 20px;
+  color: #a25aff;
+  background-color: white;
+}
+.decor-blog .item-text .explore:hover {
+  background-color: #a25aff;
+  color: white;
+}
+
+
+.decor-blog .title .explore-btn {
+  background-color: white;
+  color: #7c3aed;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.decor-blog .image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  /* margin-top: 10px; */
+}
+
+.decor-blog .image-grid .image-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s all;
+}
+.decor-blog .image-grid .image-card:hover {
+  transform: scale(1.04);
+}
+
+.decor-blog .image-grid .image-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.decor-blog .image-grid .image-card .text-overlay {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  color: white;
+  background-color: #00000040;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+/* -----------------fashion-blog------------- */
+
+.fashion-blog {
+  width: 100%;
+  height: auto;
+  /* padding: 120px 0; */
+  background-color: #2f5e8b;
+}
+.fashion-blog .item-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fashion-blog .item-text .title {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.895);
+}
+.fashion-blog .item-text .title h3 {
+  font-size: 48px;
+}
+.fashion-blog .item-text .title p {
+  font-size: 25px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.fashion-blog .item-text .explore {
+  padding: 5px 14px;
+  font-size: 16px;
+  transition: 0.3s all;
+  border-radius: 20px;
+  color: #2f5e8b;
+  background-color: white;
+}
+.fashion-blog .item-text .explore:hover {
+  background-color: #2f5e8b;
+  color: white;
+}
+.fashion-blog .pic-fashion {
+  width: 80%;
+  height: auto;
+  position: relative;
+}
+.fashion-blog .pic-fashion .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.fashion-blog .pic-fashion .img-pop-up {
+  width: 300px;
+  position: absolute;
+  top: 240px;
+}
+.fashion-blog .pic-fashion .img-pop-up img {
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 20px;
+}
+/* ------------------about------------- */
+.about-area {
+  width: 100%;
+  height: auto;
+  padding: 80px 0;
+  background-color: var(--color-bg); /* Added to ensure dark mode compatibility */
+}
+.about-area .about-wiboard {
+  text-align: center;
+  padding-inline: 300px;
+  background-image: url(images/feature_bg_1.png);
+  padding-block: 50px;
+}
+.about-area .about-wiboard h3 {
+  font-size: 48px;
+  line-height: 1.5;
+  color: #000;
+}
+.about-area .about-wiboard span {
+  color: #33c733;
+}
+.about-area .about-wiboard p {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.693);
+  line-height: 1.5;
+  text-align: center;
+  padding-top: 20px;
+  
+}
+.about-area .mission {
+
+
+  padding: 80px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.156);
+}
+.about-area .mission .title {
+ 
+  text-align: center;
+}
+.about-area .mission .title h3 {
+  font-size: 48px;
+  line-height: 1.5;
+}
+.about-area .mission .title span {
+  color: #33c733;
+}
+.about-area .mission .title p {
+  font-size: 25px;
+
+  line-height: 1.5;
+  text-align: justify;
+  padding-top: 20px;
+  --color-fg: #ffffff;
+}
+.about-area .mission img {
+  width: 600px;
+ margin: auto;
+ display: flex;
+ align-items: center;
+ justify-content: right;
+
+}
+
+/* ================= Responsive =============== */
+/* small-laptop */
+@media (max-width: 1250px) {
+  .about-area .about-wiboard {
+    padding-inline: 200px;
+  }
+}
+
+/* Ipad pro */
+@media (max-width: 1024px) {
+  .about-area .about-wiboard {
+    padding-inline: 150px;
+  }
+}
+
+/* Ipad mini */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  button img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* About section adjustments */
+  .about-area .about-wiboard {
+    padding-inline: 40px;
+  }
+  .about-area .mission {
+    padding: 40px 0;
+  }
+  .about-area .mission img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .navbar .aside-left .btn-explore {
+   
+    font-size: 16px;
+    border-radius: 16px;
+    padding: 4px 10px;
+  }
+
+  .navbar .aside-left .nav-branding {
+    width: 90px;
+  }
+  .navbar .aside-right {
+    gap: 4px;
+  }
+  .navbar .aside-right .about {
+    font-size: 16px;
+  }
+  .navbar .aside-right .about:hover {
+    transform: scale(1.02);
+  }
+  .navbar .aside-right .btn {
+    gap: 4px;
+    font-size: 16px;
+    
+  .navbar .aside-right .btn a {
+    border-radius: 8px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+  }
+  }
+
+  .swiper-slide img {
+    height: 40vh;
+  }
+  /* ---------food-blog----------- */
+
+  .row {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    background-color: black;
+  }
+  .col-6 {
+    width: 100%;
+  }
+
+  .blog-type .food-blog .item-text {
+   
+    width: 100%;
+
+    padding: 30px 0 80px 0px;
+  }
+
+  .blog-type .food-blog .item-text .title h3 {
+    font-size: 26px;
+    padding: 0;
+    padding-bottom: 10px;
+  }
+  .blog-type .food-blog .item-text .title p {
+    font-size: 18px;
+    width: 100%;
+    padding: 0;
+
+    padding-inline: 40px;
+    padding-bottom: 30px;
+  }
+  .blog-type .food-blog .item-text .explore {
+    font-size: 18px;
+    padding: 8px 16px;
+
+    margin: 0px;
+  }
+
+  .blog-type .food-blog .item-pic {
+    padding: 0;
+    padding-top: 80px;
+  }
+
+  .blog-type .food-blog .item-pic .pic-02 {
+    gap: 5px;
+  }
+
+  .blog-type .food-blog .item-pic .pic-03 {
+    margin-inline: 40px;
+  }
+
+  .blog-type .food-blog .item-pic img {
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+  }
+  /* ---------decor-blog----------- */
+  .decor-blog {
+    padding: 80px 0;
+  }
+
+  .decor-blog .item-text {
+    padding: 0 0 50px 0;
+  }
+
+  .decor-blog .item-text .title h3 {
+    font-size: 26px;
+    padding-bottom: 10px;
+  }
+  .decor-blog .item-text .title p {
+    font-size: 18px;
+
+    padding: 0;
+    padding-bottom: 30px;
+  }
+  .decor-blog .item-text .explore {
+    padding: 8px 16px;
+    font-size: 18px;
+  }
+
+  .decor-blog .title .explore-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+
+    border-radius: 20px;
+  }
+
+  .decor-blog .image-grid .image-card img {
+    height: 180px;
+  }
+
+  .decor-blog .image-grid .image-card .text-overlay {
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 24px;
+  }
+  /* ---------fashion-blog----------- */
+
+  .fashion-blog .item-text {
+    padding-bottom: 80px;
+  }
+  .fashion-blog .item-text .title {
+    padding-top: 50px;
+  }
+  .fashion-blog .item-text .title h3 {
+    font-size: 26px;
+    padding-bottom: 10px;
+  }
+  .fashion-blog .item-text .title p {
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+  .fashion-blog .item-text .explore {
+    padding: 8px 16px;
+    font-size: 18px;
+  }
+
+  .fashion-blog .pic-fashion {
+    width: 100%;
+  }
+
+  .fashion-blog .pic-fashion .img-pop-up {
+    width: 260px;
+    height: 140px;
+    top: 340px;
+  }
+  /* ---------about-blog----------- */
+  .about-area {
+    width: 100%;
+    height: 100vh;
+    padding: 80px 0;
+  
+  }
+  .about-area .about-wiboard {
+    
+    text-align: center;
+    padding-inline: 40px;
+    background-image: url(image/feature_bg_1.png);
+  padding-block: 50px;
+  background-size: cover;
+   
+  
+   
+  }
+  .about-area .about-wiboard h3 {
+    font-size: 48px;
+    line-height: 1.5;
+    color: black;
+    
+  }
+  .about-area .about-wiboard span {
+    color: #33c733;
+  }
+  .about-area .about-wiboard p {
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.693);
+    line-height: 1.5;
+    text-align: center;
+    padding-top: 20px;
+  
+  }
+  .about-area .mission {
+  
+  
+    padding: 80px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.156);
+  }
+  .about-area .mission .title {
+   
+    text-align: center;
+  }
+  .about-area .mission .title h3 {
+    font-size: 26px;
+    padding-top: 30px;
+    line-height: 1.5;
+  
+  }
+  .about-area .mission .title span {
+    color: #33c733;
+  }
+  .about-area .mission .title p {
+    font-size: 18px;
+   
+    line-height: 1.5;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    --color-fg: #ffffff;
+  }
+  .about-area .mission img {
+    width: 600px;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   justify-content: right;
+  
+  }
+}
+
+/* phone */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 8px 0;
+  }
+  button img {
+    width: 20px;
+    height: 20px;
+  }
+  .navbar .aside-left {
+    gap: 4px;
+    color: var(--color-fg);
+  }
+
+  /* About section adjustments */
+  .about-area .about-wiboard {
+    padding-inline: 20px;
+  }
+  .about-area .mission {
+    padding: 30px 0;
+  }
+  .about-area .mission img {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  /* Ensure proper spacing in all sections */
+  .blog-type .food-blog .item-text,
+  .decor-blog .item-text,
+  .fashion-blog .item-text {
+    padding: 30px 20px;
+  }
+  
+  /* Adjust image sizes for mobile */
+  .blog-type .food-blog .item-pic img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .navbar .aside-left .btn-explore {
+    border-radius: 8px;
+    padding: 2px 6px;
+    font-size: 8px;
+  }
+
+  .navbar .aside-left .nav-branding {
+    width: 60px;
+  }
+  .navbar .aside-right {
+    gap: 4px;
+  }
+  .navbar .aside-right .about {
+    font-size: 8px;
+  }
+  .navbar .aside-right .about:hover {
+    transform: scale(1.02);
+  }
+  .navbar .aside-right .btn {
+    gap: 4px;
+    font-size: 8px;
+  }
+  .navbar .aside-right .btn a {
+    border-radius: 8px;
+    padding: 2px 6px;
+  }
+
+  .swiper-slide img {
+    height: 40vh;
+  }
+  /* ---------food-blog----------- */
+
+  .row {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+  .col-6 {
+    width: 100%;
+  }
+
+  .blog-type .food-blog .item-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    width: 100%;
+    padding: 50px 0px;
+  }
+
+  .blog-type .food-blog .item-text .title h3 {
+    font-size: 24px;
+  }
+  .blog-type .food-blog .item-text .title p {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    padding-inline: 60px;
+  }
+  .blog-type .food-blog .item-text .explore {
+    font-size: 16px;
+    padding: 5px 14px;
+    border-radius: 20px;
+
+    margin: 0px;
+    margin-top: 10px;
+  }
+
+  .blog-type .food-blog .item-pic {
+    padding: 0;
+ padding-top: 50px;
+    margin: auto;
+  }
+
+  .blog-type .food-blog .item-pic .pic-02 {
+    gap: 5px;
+  }
+
+  .blog-type .food-blog .item-pic .pic-03 {
+    margin-inline: 40px;
+  }
+
+  .blog-type .food-blog .item-pic img {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    padding: 0px;
+  }
+  /* ---------decor-blog----------- */
+  .decor-blog {
+    padding: 50px 0;
+  }
+
+  .decor-blog .item-text {
+    padding: 0 0 50px 0;
+  }
+
+  .decor-blog .item-text .title h3 {
+    font-size: 24px;
+  }
+  .decor-blog .item-text .title p {
+    font-size: 16px;
+    
+    
+    padding: 0;
+  }
+  .decor-blog .item-text .explore {
+    padding: 5px 14px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-top: 30px;
+
+  }
+
+  .decor-blog .title .explore-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+
+    border-radius: 20px;
+  }
+
+  .decor-blog .image-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  .decor-blog .image-grid .image-card img {
+    height: 180px;
+
+    border-radius: 10px;
+  }
+
+  .decor-blog .image-grid .image-card .text-overlay {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+  /* ---------fashion-blog----------- */
+
+  .fashion-blog .item-text {
+    padding-bottom: 50px;
+  }
+  .fashion-blog .item-text .title {
+    padding-top: 50px;
+  }
+  .fashion-blog .item-text .title h3 {
+    font-size: 24px;
+  }
+  .fashion-blog .item-text .title p {
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  .fashion-blog .item-text .explore {
+    padding: 5px 14px;
+    font-size: 16px;
+
+    border-radius: 20px;
+  }
+
+  .fashion-blog .pic-fashion {
+    width: 100%;
+  }
+  .fashion-blog .pic-fashion .card img {
+    width: 100%;
+    height: 500px;
+  }
+  .fashion-blog .pic-fashion .img-pop-up {
+    width: 200px;
+
+    top: 120px;
+  }
+  /* ---------about-blog----------- */
+  .about-area {
+    width: 100%;
+    height: 100vh;
+    padding: 80px 0;
+  
+  }
+  .about-area .about-wiboard {
+    
+    text-align: center;
+    padding-inline: 10px;
+    background-image: url(image/feature_bg_1.png);
+  padding-block: 50px;
+  background-size: cover;
+   
+  
+   
+  }
+  .about-area .about-wiboard h3 {
+    font-size: 24px;
+    line-height: 1.5;
+    
+  }
+  .about-area .about-wiboard span {
+    color: #33c733;
+  }
+  .about-area .about-wiboard p {
+    font-size: 14px;
+    --color-fg: #ffffff;
+    line-height: 1.5;
+    text-align: center;
+    padding-top: 20px;
+  
+  }
+  .about-area .mission {
+  
+  
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.156);
+  }
+  .about-area .mission .title {
+   
+    text-align: center;
+  }
+  .about-area .mission .title h3 {
+    font-size: 24px;
+    padding-top: 30px;
+    line-height: 1.5;
+  
+  }
+  .about-area .mission .title span {
+    color: #33c733;
+  }
+  .about-area .mission .title p {
+    font-size: 14px;
+  
+    line-height: 1.5;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    --color-fg: #ffffff;
+  }
+  .about-area .mission img {
+    width: 300px;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   justify-content: right;
+  
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Swiper container styles */
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Swiper slide styles */
+.mySwiper {
+  width: 100%;
+  height: 800px; /* Set your desired fixed height */
+}
+
+/* Image container to maintain aspect ratio */
+.slide-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Image styles to maintain aspect ratio */
+.slide-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This will cover the container while maintaining aspect ratio */
+}
+
+/* Optional: Adjust pagination bullet position */
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
+/* Optional: Navigation button styles */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+}
+
+/* Swiper adjustments for mobile */
+@media (max-width: 600px) {
+  .swiper-slide img {
+    height: 50vh;
+  }
+}
