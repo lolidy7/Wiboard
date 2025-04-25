@@ -18,6 +18,10 @@ import NotFoundPage from "./pages/NotFound";
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/welcome",
+      element: <Welcome />,
+    },
     // Public routes without Layout (e.g., /login, /signup)
     {
       path: "/login",
