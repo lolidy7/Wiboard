@@ -8,7 +8,7 @@ const About = () => {
       role: 'Team Leader',
       image: '/images/kanytha.jpg',
       linkedin: 'https://linkedin.com/in/team1',
-      email: 'mailto:kanytha@example.com',
+      email: 'mailto:kanytha@gmail.com',
       github: 'https://github.com/Kanytha'
     },
     {
@@ -16,7 +16,7 @@ const About = () => {
       role: 'Sub Leader',
       image: '/images/rady.jpg',
       linkedin: 'https://linkedin.com/in/team2',
-      email: 'mailto:rady@example.com',
+      email: 'mailto:rady@gmail.com',
       github: 'https://github.com/lolidy7'
     },
     {
@@ -24,7 +24,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/saroeun.jpg',
       linkedin: 'https://linkedin.com/in/team3',
-      email: 'mailto:saroeun@example.com',
+      email: 'mailto:saroeun@gmail.com',
       github: 'https://github.com/Saroeun21'
     },
     {
@@ -32,7 +32,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/cholna.jpg',
       linkedin: 'https://linkedin.com/in/team4',
-      email: 'mailto:cholna@example.com',
+      email: 'mailto:cholna@gmail.com',
       github: 'https://github.com/ativity11212'
     },
     {
@@ -40,7 +40,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/sothat.jpg',
       linkedin: 'https://linkedin.com/in/team5',
-      email: 'mailto:sothatt@example.com',
+      email: 'mailto:sothatt@gmail.com',
       github: 'https://github.com/aoksothatt'
     },
     {
@@ -48,7 +48,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/liza.jpg',
       linkedin: 'https://linkedin.com/in/team6',
-      email: 'mailto:liza@example.com',
+      email: 'mailto:liza@gmail.com',
       github: 'https://github.com/Heanliza33'
     },
     {
@@ -56,7 +56,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/livin.jpg',
       linkedin: 'https://linkedin.com/in/team7',
-      email: 'mailto:grace@example.com',
+      email: 'mailto:grace@gmail.com',
       github: 'https://github.com/Livin-ddd'
     },
     {
@@ -64,7 +64,7 @@ const About = () => {
       role: 'Front-End',
       image: '/images/harry.jpg',
       linkedin: 'https://linkedin.com/in/team8',
-      email: 'mailto:harry@example.com',
+      email: 'mailto:harry@gmail.com',
       github: 'https://github.com/team8'
     },
   ];
