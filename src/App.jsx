@@ -15,6 +15,7 @@ import AuthMiddleware from "./components/auth/middleware/AuthMiddleware";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFoundPage from "./pages/NotFound";
+import About from "./pages/About";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +40,10 @@ function App() {
         {
           path: "/explore",
           element: <Explore />,
+        },
+        {
+          path: "/about",
+          element: <About />,
         },
       ],
     },

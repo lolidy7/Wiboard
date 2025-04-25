@@ -57,8 +57,8 @@ export default function Navbar() {
         show={signUpModalOpen}
         onClose={() => setSignUpModalOpen(false)}
         onSignUpSuccess={() => {
-          setShowLoginModal(true)
-          setSignUpModalOpen(false)
+          setShowLoginModal(true);
+          setSignUpModalOpen(false);
         }}
       />
 
@@ -127,7 +127,7 @@ export default function Navbar() {
               )}
             </button>
             {user ? (
-              <Link to='/profile'>
+              <Link to="/profile">
                 <img
                   src={user.avatar || "./public/images/user-profile.png"}
                   alt="user-profile"
@@ -186,6 +186,13 @@ export default function Navbar() {
                   >
                     Sign Up
                   </li>
+                  <Link to={"/about"}>
+                    <li
+                      className="px-2 py-1 hover:bg-gray-700 rounded cursor-pointer"
+                    >
+                      About
+                    </li>
+                  </Link>
                 </>
               )}
             </ul>
@@ -217,7 +224,6 @@ export default function Navbar() {
                 fill="currentColor"
                 style={{
                   transform: isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  
                 }}
               >
                 <path
@@ -239,11 +245,18 @@ export default function Navbar() {
                   <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm text-gray-700 dark:text-gray-200 flex gap-2 items-center">
                     Dark Mode: <DarkModeToggler />
                   </li>
+                  <Link to={"/about"}>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm text-gray-700 dark:text-gray-200"
+                    >
+                      About 
+                    </li>
+                  </Link>
                   <li
                     className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm text-gray-700 dark:text-gray-200"
                     onClick={handleLogout}
                   >
-                    <Link to={"/"}> Log Out </Link> 
+                    <Link to={"/"}> Log Out </Link>
                   </li>
                 </ul>
               </div>
@@ -252,6 +265,9 @@ export default function Navbar() {
         ) : (
           <div className="hidden sm:flex items-center space-x-4">
             <DarkModeToggler />
+            <button className="text-black dark:text-white px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300">
+              <Link to={"/about"}>About</Link>
+            </button>
             <button
               className="text-black dark:text-white px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
               onClick={() => setShowLoginModal(true)}

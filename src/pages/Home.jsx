@@ -153,31 +153,50 @@ const ImageSearch = () => {
       <div className="image-grid dark:bg-zinc-800 transition-colors duration-300">
         {images.map((image, index) => (
           <Link
-            to={`/detail/${image.id}`}
-            key={`${image.id}-${index}`}
-            className="image-card"
-            ref={images.length === index + 1 ? lastImageElementRef : null}
-          >
-            <div 
-              className="image-placeholder" 
-              style={{ paddingBottom: `${(image.height / image.width) * 100}%` }}
-            />
-            <img
-              src={image.urls.regular}
-              alt={image.alt_description || `Image by ${image.user.name}`}
-              loading="lazy"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
-              }}
-            />
-            <div className="image-meta">
-              <p className="photographer">Photo by {image.user.name}</p>
-              {image.description && (
-                <p className="description">{image.description}</p>
-              )}
-            </div>
-          </Link>
+          to={`/detail/${image.id}`}
+          key={`${image.id}-${index}`}
+          className="image-card"
+          ref={images.length === index + 1 ? lastImageElementRef : null}
+        >
+          <div 
+            className="image-placeholder" 
+            style={{ paddingBottom: `${(image.height / image.width) * 100}%` }}
+          />
+          <img
+            src={image.urls.small} 
+            data-src={image.urls.regular} 
+            alt={image.alt_description || `Image by ${image.user.name}`}
+            loading="lazy"
+            onLoad={(e) => {
+              // When small image loads, load the regular size
+              if (e.target.dataset.src) {
+                const img = new Image();
+                img.src = e.target.dataset.src;
+                img.onload = () => {
+                  e.target.src = e.target.dataset.src;
+                };
+              }
+            }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+              e.target.style.opacity = 1; // Ensure placeholder is visible
+            }}
+            style={{
+              transition: 'opacity 0.5s ease',
+              opacity: 0 // Start with image invisible
+            }}
+            onLoad={(e) => {
+              e.target.style.opacity = 1; // Fade in when loaded
+            }}
+          />
+          <div className="image-meta">
+            <p className="photographer">Photo by {image.user.name}</p>
+            {image.description && (
+              <p className="description">{image.description}</p>
+            )}
+          </div>
+        </Link>
         ))}
       </div>
 

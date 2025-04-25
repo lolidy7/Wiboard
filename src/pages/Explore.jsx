@@ -374,8 +374,7 @@ export default function Explore() {
                       {/* Image overlay for better text visibility */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                       <div className="absolute inset-0 flex flex-col items-center justify-end mb-4 text-white text-center px-2">
-                        <p className="text-sm">By {image.user}</p>
-                        <h2 className="text-lg font-bold">{image.title}</h2>
+                        <h2 className="font-bold">{image.title}</h2>
                       </div>
                     </div>
                   ))}

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { RiShare2Line, RiMoreFill } from "react-icons/ri";
 import { MdClose, MdAdd, MdDownload } from "react-icons/md";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import '../css/detail/detail.css';
 import axios from 'axios';
 import {
   FacebookShareButton,
@@ -31,6 +32,8 @@ export default function Detail() {
   const [loading, setLoading] = useState(true);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const shareMenuRef = useRef(null);
+  const [showingDownloadId, setShowingDownloadId] = useState(null);
+
 
   // Get dark mode state from context
   const { darkMode } = useDarkMode();
@@ -42,13 +45,27 @@ export default function Detail() {
   const [selectedCollection, setSelectedCollection] = useState(null);
 
   // New state for download dropdown
-  const [showMainDownload, setShowMainDownload] = useState(false);
-  const [showingDownloadId, setShowingDownloadId] = useState(null);
+  // const [showMainDownload, setShowMainDownload] = useState(false);
+  // const [showingDownloadId, setShowingDownloadId] = useState(null);
 
   // Refs for clicking outside the dropdowns
   const modalRef = useRef(null);
   const mainDownloadRef = useRef(null);
   const relatedDownloadRef = useRef(null);
+
+  const [showMainDownload, setShowMainDownload] = useState(false);
+  const timeoutRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setShowMainDownload(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setShowMainDownload(false);
+    }, 200);
+  };
 
   // Load saved collections from localStorage
   useEffect(() => {
@@ -117,10 +134,10 @@ export default function Detail() {
       } catch (error) {
         if (error.response && error.response.status === 403) {
           console.error('Rate limit exceeded. Please try again later.');
-      }else {
-        console.error('Error fetching data:', error);
+        } else {
+          console.error('Error fetching data:', error);
+        }
       }
-    } 
       finally {
         setLoading(false);
       }
@@ -157,12 +174,12 @@ export default function Detail() {
   const fetchSimilarImagesWithVision = async (imageUrl) => {
     try {
       // Ensure the API key is properly formatted and valid
-      if (!import.meta.env.VITE_GOOGLE_VISION_API_KEY || 
-          import.meta.env.VITE_GOOGLE_VISION_API_KEY.length < 20) {
+      if (!import.meta.env.VITE_GOOGLE_VISION_API_KEY ||
+        import.meta.env.VITE_GOOGLE_VISION_API_KEY.length < 20) {
         console.error('Invalid Google Vision API key');
         return [];
       }
-      
+
       // Use imageUri for publicly accessible images
       const visionApiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${import.meta.env.VITE_GOOGLE_VISION_API_KEY}`;
       const requestBody = {
@@ -182,7 +199,7 @@ export default function Detail() {
           }
         ]
       };
-      
+
       // Make the API call
       const visionResponse = await fetch(visionApiUrl, {
         method: 'POST',
@@ -191,23 +208,23 @@ export default function Detail() {
         },
         body: JSON.stringify(requestBody)
       });
-      
+
       // Check if the response is OK
       if (!visionResponse.ok) {
         const errorText = await visionResponse.text();
         console.error('Vision API error:', errorText);
         return [];
       }
-      
+
       const visionData = await visionResponse.json();
       console.log('Vision API response:', visionData); // Log the full response to see its structure
-      
+
       // Safely extract visually similar images with proper error checking
-      if (visionData.responses && 
-          visionData.responses[0] && 
-          visionData.responses[0].webDetection && 
-          visionData.responses[0].webDetection.visuallySimilarImages) {
-        
+      if (visionData.responses &&
+        visionData.responses[0] &&
+        visionData.responses[0].webDetection &&
+        visionData.responses[0].webDetection.visuallySimilarImages) {
+
         return visionData.responses[0].webDetection.visuallySimilarImages.map(image => ({
           url: image.url,
           title: 'Similar Image'
@@ -223,39 +240,28 @@ export default function Detail() {
   };
 
   // Improved function to handle download
-  const handleDownload = (imageUrl, title = 'image') => {
-    // Create a temporary link element
-    const link = document.createElement('a');
+  const handleDownload = async (imageUrl, title = 'image') => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
 
-    // Use fetch to get the image as a blob
-    fetch(imageUrl)
-      .then(response => response.blob())
-      .then(blob => {
-        // Create a blob URL for the image
-        const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${title}.jpg`;
+      document.body.appendChild(link);
+      link.click();
 
-        // Set the download attributes
-        link.href = blobUrl;
-        link.download = `${title || 'image'}.jpg`;
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
 
-        // Append the link to the body, click it, and remove it
-        document.body.appendChild(link);
-        link.click();
-
-        // Clean up
-        setTimeout(() => {
-          document.body.removeChild(link);
-          URL.revokeObjectURL(blobUrl); // Free up memory
-        }, 100);
-      })
-      .catch(error => {
-        console.error('Error downloading image:', error);
-        alert('Failed to download image. Please try again later.');
-      });
-
-    // Close the dropdown
-    setShowDropdown(false);
-    setActiveDropdownPin(null);
+      setShowMainDownload(false);
+    } catch (error) {
+      console.error('Error downloading image:', error);
+      alert('Failed to download image.');
+    }
   };
 
   // New function to open the save modal
@@ -395,7 +401,14 @@ export default function Detail() {
     }
   };
 
-  if (loading) return <div className={`text-center ${darkMode ? 'text-white bg-primary-darkmode' : ''}`}>Loading...</div>;
+  if (loading) return (
+    <div className={`fixed inset-0 flex items-center justify-center ${darkMode ? 'bg-primary-darkmode' : 'bg-white'}`}>
+      <div className="loading-indicator">
+        <div className="spinner"></div>
+        <p className={darkMode ? 'text-white' : ''}>Loading...</p>
+      </div>
+    </div>
+  );
   if (!pin) return <div className={`text-center ${darkMode ? 'text-white bg-primary-darkmode' : ''}`}>No data available.</div>;
 
   return (
@@ -414,8 +427,8 @@ export default function Detail() {
       {/* Main Content */}
       <div className="flex justify-center items-center px-4">
         <div className={`rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-5xl h-auto md:h-[600px] relative p-4 gap-8 border-t border-b transition-colors duration-300 ${darkMode
-            ? 'bg-gray-800 border-gray-700 text-white'
-            : 'bg-white border-gray-300 text-black'
+          ? 'bg-gray-800 border-gray-700 text-white'
+          : 'bg-white border-gray-300 text-black'
           }`}>
           {/* Left Side: Big Image */}
           <div className="flex-1 hidden md:block">
@@ -468,15 +481,21 @@ export default function Detail() {
                   </svg>
                   <span className="ml-2">{likes}</span>
                 </button>
+
                 {/* Share Icon */}
-                <div className="relative" ref={shareMenuRef}>
+                <div className="relative group" ref={shareMenuRef}>
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs px-2 py-1 rounded-full bg-black text-white whitespace-nowrap z-20">
+                    Share
+                  </div>
+
+                  {/* Button */}
                   <button
                     onClick={() => setShowShareMenu(!showShareMenu)}
                     className={`flex items-center ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'}`}
                   >
                     <RiShare2Line className="h-6 w-6" />
                   </button>
-
                   {/* Share Menu Popup */}
                   {showShareMenu && (
                     <div className={`absolute z-10 mt-2 -left-10 w-52 rounded-md shadow-lg ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
@@ -544,18 +563,23 @@ export default function Detail() {
 
 
                 {/* More Options (3 dots) - NEW */}
-                <div className="relative" ref={mainDownloadRef}>
+                <div
+                  className="relative"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <button
-                    onClick={() => setShowMainDownload(!showMainDownload)}
-                    className={`flex items-center ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'}`}
+                    className={`flex items-center ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'
+                      }`}
                   >
                     <RiMoreFill className="h-6 w-6" />
                   </button>
 
-                  {/* Download Dropdown Menu */}
                   {showMainDownload && (
-                    <div className={`absolute z-10 mt-2 -left-10 w-40 rounded-md shadow-lg ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                      }`}>
+                    <div
+                      className={`absolute z-10 mt-2 -left-10 w-40 rounded-md shadow-lg transition-opacity duration-200 ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+                        }`}
+                    >
                       <div className="py-1">
                         <button
                           onClick={() => handleDownload(pin.image_large_url, pin.title)}
@@ -587,8 +611,8 @@ export default function Detail() {
             <div className="absolute top-4 right-4">
               <button
                 className={`${isSaved
-                    ? 'bg-red-500 hover:bg-red-600'
-                    : 'bg-green-500 hover:bg-green-600'
+                  ? 'bg-red-500 hover:bg-red-600'
+                  : 'bg-green-500 hover:bg-green-600'
                   } text-white px-4 py-2 rounded-full text-sm font-medium`}
                 onClick={openSaveModal}
               >
@@ -601,11 +625,11 @@ export default function Detail() {
 
       {/* Save Modal */}
       {showSaveModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center">
           <div
             ref={modalRef}
-            className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-              } rounded-lg p-6 w-full max-w-md relative`}
+            className={`relative rounded-lg p-6 w-full max-w-md shadow-lg transition-all ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+              }`}
           >
             {/* Close Button */}
             <button
@@ -630,9 +654,7 @@ export default function Detail() {
                     <div
                       key={collection.name}
                       onClick={() => handleSaveToCollection(collection.name)}
-                      className={`p-3 rounded-lg cursor-pointer flex items-center justify-between ${darkMode
-                          ? 'hover:bg-primary-darkmode'
-                          : 'hover:bg-gray-100'
+                      className={`p-3 rounded-lg cursor-pointer flex items-center justify-between ${darkMode ? 'hover:bg-primary-darkmode' : 'hover:bg-gray-100'
                         }`}
                     >
                       <div className="flex items-center">
@@ -647,7 +669,9 @@ export default function Detail() {
                         )}
                         <div>
                           <p className="font-medium">{collection.name}</p>
-                          <p className="text-sm text-gray-500">{collection.images.length} items</p>
+                          <p className="text-sm text-gray-500">
+                            {collection.images.length} items
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -667,8 +691,8 @@ export default function Detail() {
                   value={newCollectionName}
                   onChange={(e) => setNewCollectionName(e.target.value)}
                   className={`w-full p-2 border rounded-lg ${darkMode
-                      ? 'bg-primary-darkmode border-gray-600 text-white'
-                      : 'bg-white border-gray-300 text-black'
+                    ? 'bg-primary-darkmode border-gray-600 text-white'
+                    : 'bg-white border-gray-300 text-black'
                     }`}
                   autoFocus
                 />
@@ -684,8 +708,8 @@ export default function Detail() {
                     type="submit"
                     disabled={!newCollectionName.trim()}
                     className={`px-4 py-2 rounded-lg ${newCollectionName.trim()
-                        ? 'bg-green-500 hover:bg-green-600 text-white'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      ? 'bg-green-500 hover:bg-green-600 text-white'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       }`}
                   >
                     Create
@@ -695,14 +719,20 @@ export default function Detail() {
             ) : (
               <button
                 onClick={() => setShowNewCollectionInput(true)}
-                className={`w-full p-3 rounded-lg flex items-center justify-between ${darkMode
-                    ? 'bg-primary-darkmode hover:bg-gray-600'
-                    : 'bg-gray-100 hover:bg-gray-200'
-                  } mt-4`}
+                className={`w-full p-3 rounded-lg flex items-center justify-between mt-4 ${darkMode
+                  ? 'bg-primary-darkmode hover:bg-gray-600'
+                  : 'bg-gray-100 hover:bg-gray-200'
+                  }`}
               >
                 <div className="flex items-center">
-                  <div className={`w-12 h-12 rounded-lg ${darkMode ? 'bg-gray-600' : 'bg-gray-200'} flex items-center justify-center mr-3`}>
-                    <MdAdd size={24} className={darkMode ? 'text-gray-300' : 'text-gray-700'} />
+                  <div
+                    className={`w-12 h-12 rounded-lg flex items-center justify-center mr-3 ${darkMode ? 'bg-gray-600' : 'bg-gray-200'
+                      }`}
+                  >
+                    <MdAdd
+                      size={24}
+                      className={darkMode ? 'text-gray-300' : 'text-gray-700'}
+                    />
                   </div>
                   <p className="font-medium">Create new collection</p>
                 </div>
@@ -711,7 +741,6 @@ export default function Detail() {
           </div>
         </div>
       )}
-
       {/* Related Pins Section */}
       <div className="mt-8 px-4">
         <h2 className="text-xl font-bold mb-4">More Like This</h2>
@@ -722,58 +751,61 @@ export default function Detail() {
           loader={<p className={`text-center ${darkMode ? 'text-gray-300' : ''}`}>Loading more pins...</p>}
           endMessage={<p className={`text-center ${darkMode ? 'text-gray-300' : ''}`}>No more pins to load.</p>}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="masonry-layout">
             {relatedPins.map((pin) => (
-              <div key={pin.id} className={`rounded-lg shadow-md overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'} relative group`}>
-                <Link to={`/detail/${pin.id}`}>
-                  <img
-                    src={pin.image_large_url}
-                    alt={pin.title || 'Photo'}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4">
-                    <h2 className="text-lg font-medium">{pin.title || 'Untitled'}</h2>
-                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{pin.description || 'No description available'}</p>
-                  </div>
-                </Link>
+              <div key={pin.id} className="masonry-item relative group">
+                <div className={`rounded-lg overflow-hidden relative`}>
+                  <Link to={`/detail/${pin.id}`}>
+                    <div className="pin-image-container">
+                      <img
+                        src={pin.image_large_url}
+                        alt={pin.title || 'Photo'}
+                        className="pin-image w-full h-auto object-cover"
+                      />
+                      {/* Text overlay that appears on hover */}
+                      <div className="text-overlay">
+                        <h3 className="text-lg font-medium line-clamp-2-custom">{pin.title || 'Untitled'}</h3>
+                        <p className="text-sm line-clamp-2-custom">{pin.description || 'No description available'}</p>
 
-                {/* Download Button for Related Pins - NEW */}
-                <div
-                  className={`absolute top-2 right-2 ${showingDownloadId === pin.id ? 'visible' : 'invisible group-hover:visible'}`}
-                  ref={showingDownloadId === pin.id ? relatedDownloadRef : null}
-                >
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowingDownloadId(showingDownloadId === pin.id ? null : pin.id);
-                    }}
-                    className={`flex items-center justify-center p-2 rounded-full ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-                      } shadow-md hover:shadow-lg`}
-                  >
-                    <RiMoreFill className="h-5 w-5" />
-                  </button>
-
-                  {/* Download Dropdown for Each Related Pin */}
-                  {showingDownloadId === pin.id && (
-                    <div className={`absolute z-10 mt-2 right-0 w-40 rounded-md shadow-lg ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                      }`}>
-                      <div className="py-1">
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleDownload(pin.image_large_url, pin.title);
-                          }}
-                          className={`flex items-center px-4 py-2 w-full text-left ${darkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-                            }`}
-                        >
-                          <MdDownload className="mr-2" />
-                          Download
-                        </button>
                       </div>
                     </div>
-                  )}
+                  </Link>
+
+                  {/* Download Button for Related Pins */}
+                  <div
+                    className={`absolute top-2 right-2 ${showingDownloadId === pin.id ? 'visible' : 'invisible group-hover:visible'}`}
+                    ref={showingDownloadId === pin.id ? relatedDownloadRef : null}
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setShowingDownloadId(showingDownloadId === pin.id ? null : pin.id);
+                      }}
+                      className={`flex items-center justify-center p-2 rounded-full ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} shadow-md hover:shadow-lg`}
+                    >
+                      <RiMoreFill className="h-5 w-5" />
+                    </button>
+
+                    {/* Download Dropdown for Each Related Pin */}
+                    {showingDownloadId === pin.id && (
+                      <div className={`absolute z-10 mt-2 right-0 w-40 rounded-md shadow-lg ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                        <div className="py-1">
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleDownload(pin.image_large_url, pin.title);
+                            }}
+                            className={`flex items-center px-4 py-2 w-full text-left ${darkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
+                          >
+                            <MdDownload className="mr-2" />
+                            Download
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -782,7 +814,7 @@ export default function Detail() {
       </div>
       {/* Visually Similar Images Section */}
       <div className="mt-8 px-4">
-        <h2 className="text-xl font-bold mb-4">Visually Similar Images</h2>
+        <h2 className="text-xl font-bold mb-4"></h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {similarImages.length > 0 ? (
             similarImages.map((image, index) => (
@@ -807,7 +839,7 @@ export default function Detail() {
               </div>
             ))
           ) : (
-            <p className={`text-center ${darkMode ? 'text-gray-300' : ''}`}>No visually similar images found.</p>
+            <p className={`text-center ${darkMode ? 'text-gray-300' : ''}`}></p>
           )}
         </div>
       </div>
